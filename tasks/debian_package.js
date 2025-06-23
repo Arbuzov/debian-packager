@@ -50,6 +50,7 @@ function create (config) {
     // Merge task-specific and/or target-specific options with these defaults.
     var settings = _mergeOptions(config),
         spawn = require('child_process').spawn,
+        spawnSync = require('child_process').spawnSync,
         dateFormat = require('dateformat'),
         now = dateFormat(new Date(), 'ddd, d mmm yyyy h:MM:ss +0000'),
         temp_directory = settings.working_directory + settings.packaging_directory_name,
@@ -140,6 +141,20 @@ function create (config) {
         return;
     }
 
+    // Automatically create orig tarball when using quilt format
+    if (settings.source_format === '3.0 (quilt)') {
+        var tarball = path.resolve(settings.working_directory,
+            settings.package_name + '_' + settings.version + '.orig.tar.gz');
+        console.log(messages.creatingOrig);
+        var tarResult = spawnSync('tar', [
+            'czf', tarball, '--exclude=debian', '-C', temp_directory, '.'
+        ], { stdio: ['ignore', process.stdout, process.stderr] });
+        if (tarResult.status !== 0) {
+            _cleanUp(settings);
+            console.error(messages.origTarError);
+            return;
+        }
+    }
 
     var checkDeps = settings.disable_debuild_deps_check ? "-d" : "-D";
     var debuild = spawn('debuild', ['--no-tgz-check', '-sa', checkDeps, '-us', '-uc', '--lintian-opts', '--suppress-tags', 'tar-errors-from-data,tar-errors-from-control,dir-or-file-in-var-www'], {

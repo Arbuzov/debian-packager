@@ -253,7 +253,7 @@ The software category. Used to fill the "section" field of the control file
 Type: `String`
 Default value: `3.0 (native)`
 
-The Debian source format written to `debian/source/format`. Set to `3.0 (quilt)` for non-native packages.
+The Debian source format written to `debian/source/format`. Set to `3.0 (quilt)` for non-native packages. When `3.0 (quilt)` is used and no `orig.tar.gz` is present, `debian-packager` will create one automatically before running `debuild`.
 
 #### options.preinst.src
 Type: `String`

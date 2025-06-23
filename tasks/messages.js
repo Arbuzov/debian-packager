@@ -33,6 +33,9 @@ module.exports = {
 
     debuildError: 'Error running debuild!!',
 
+    creatingOrig: 'Creating orig source archive...',
+    origTarError: 'Error creating orig source archive!!',
+
     debhelperNotFound: '`debhelper` dependency not found. try running \'sudo apt-get install debhelper\'',
 
     dputError: 'Error uploading package using dput!!'

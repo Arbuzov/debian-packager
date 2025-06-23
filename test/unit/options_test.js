@@ -63,7 +63,7 @@ exports.options_test = {
 
             test.equal(results.long_description, this.config.description.split(/\n/)[1].trim());
 
-            test.equal(results.short_description, this.config.description.split(/\n/)[0].trim())
+            test.equal(results.short_description, this.config.description.split(/\n/)[0].trim());
 
             test.equal(results.version, this.config.version);
 
@@ -91,7 +91,7 @@ exports.options_test = {
 
             test.equal(results.long_description, overrides.long_description);
 
-            test.equal(results.short_description, overrides.short_description)
+            test.equal(results.short_description, overrides.short_description);
 
             test.equal(results.version, overrides.version);
 

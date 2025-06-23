@@ -48,6 +48,7 @@ Typically the `debianPackageOptions` section would only need to provide a `files
     "build_number": "1",
     "target_architecture": "amd64",
     "category": "devel",
+    "source_format": "3.0 (quilt)",
     "links": [
         {
             "source": "/var/log/my-project",
@@ -248,6 +249,12 @@ Default value: `misc`
 
 The software category. Used to fill the "section" field of the control file
 
+#### options.source_format
+Type: `String`
+Default value: `3.0 (native)`
+
+The Debian source format written to `debian/source/format`. Set to `3.0 (quilt)` for non-native packages.
+
 #### options.preinst.src
 Type: `String`
 Default value: `undefined`
@@ -378,7 +385,8 @@ options: {
   version: properties.version,
   build_number: process.env.BUILD_NUMBER || process.env.DRONE_BUILD_NUMBER || process.env.TRAVIS_BUILD_NUMBER
   target_architecture: "all",
-  category: "misc"
+  category: "misc",
+  source_format: "3.0 (native)"
 }
 ```
 

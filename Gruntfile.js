@@ -61,6 +61,7 @@ module.exports = function (grunt) {
                     long_description: "the long description added to the debian package",
                     version: "2.0.0",
                     build_number: "1",
+                    source_format: "3.0 (quilt)",
                     preinst: {
                         src: 'test/integration/test_preinst.sh',
                         contents: '#!/bin/bash\n' +

@@ -1,6 +1,6 @@
 'use strict';
 
-// Exposes String.endsWidth
+// Ensure options module loads
 require('../../tasks/options');
 
 var sinon = require('sinon'),
@@ -11,21 +11,21 @@ var sinon = require('sinon'),
 exports.options_test = {
     'endsWith string extension function': testCase({
         'should match correct trailing substring': function (test) {
-            test.ok("abcdefabcabc".endsWidth("cabc"), '"abcdefabcabc" ends with "cabc"');
-            test.ok("abcdefabcabc".endsWidth("abc"), '"abcdefabcabc" ends with "abc"');
-            test.ok("abcdefabcabc".endsWidth("bc"), '"abcdefabcabc" ends with "bc"');
-            test.ok("abcdefabcabc".endsWidth("c"), '"abcdefabcabc" ends with "c"');
-            test.ok("abcdefabcabc".endsWidth("abcdefabcabc"), '"abcdefabcabc" ends with "abcdefabcabc"');
-            test.ok("abcdefabcabc".endsWidth(""), '"abcdefabcabc" ends with ""');
+            test.ok("abcdefabcabc".endsWith("cabc"), '"abcdefabcabc" ends with "cabc"');
+            test.ok("abcdefabcabc".endsWith("abc"), '"abcdefabcabc" ends with "abc"');
+            test.ok("abcdefabcabc".endsWith("bc"), '"abcdefabcabc" ends with "bc"');
+            test.ok("abcdefabcabc".endsWith("c"), '"abcdefabcabc" ends with "c"');
+            test.ok("abcdefabcabc".endsWith("abcdefabcabc"), '"abcdefabcabc" ends with "abcdefabcabc"');
+            test.ok("abcdefabcabc".endsWith(""), '"abcdefabcabc" ends with ""');
 
             // end
             test.done();
         },
         'should not-match incorrect trailing substring': function (test) {
-            test.ok(!"abcdefabcabc".endsWidth("ab"), '"abcdefabcabc" does not ends with "ab"');
-            test.ok(!"abcdefabcabc".endsWidth("abcd"), '"abcdefabcabc" does not ends with "abcd"');
-            test.ok(!"abcdefabcabc".endsWidth("def"), '"abcdefabcabc" does not ends with "def"');
-            test.ok(!"abcdefabcabc".endsWidth("cb"), '"abcdefabcabc" does not ends with "cb"');
+            test.ok(!"abcdefabcabc".endsWith("ab"), '"abcdefabcabc" does not ends with "ab"');
+            test.ok(!"abcdefabcabc".endsWith("abcd"), '"abcdefabcabc" does not ends with "abcd"');
+            test.ok(!"abcdefabcabc".endsWith("def"), '"abcdefabcabc" does not ends with "def"');
+            test.ok(!"abcdefabcabc".endsWith("cb"), '"abcdefabcabc" does not ends with "cb"');
 
             // end
             test.done();

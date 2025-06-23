@@ -3,13 +3,6 @@
 var R = require('ramda');
 var messages = require('./messages');
 
-String.prototype.endsWidth = function (substring) {
-    var str = this;
-    if (str.lastIndexOf(substring) >= 0) {
-        return str.lastIndexOf(substring) === (str.length - substring.length);
-    }
-    return false;
-};
 
 function _merge (config) {
     if (!config) {
@@ -85,7 +78,7 @@ function _validate (options, quiet) {
         // add extra space at start to ensure format is correct and allow simple unit test comparisons
         options.long_description = ' ' + options.long_description;
     }
-    if (options.working_directory && !options.working_directory.endsWidth("/")) {
+    if (options.working_directory && !options.working_directory.endsWith("/")) {
         options.working_directory = options.working_directory + "/";
     }
     if (valid) {

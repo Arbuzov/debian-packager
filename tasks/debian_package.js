@@ -147,7 +147,7 @@ function create (config) {
     debuild.on('exit', function (code) {
         if (code !== 0) {
             var logFile = fs.readFileSync(glob.sync(settings.package_location + '*.build')[0]);
-            console.error(messages.debuilError);
+            console.error(messages.debuildError);
             if (logFile.search("Unmet\\sbuild\\sdependencies\\:\\sdebhelper") !== -1) {
                 console.warn(messages.debhelperNotFound);
             }

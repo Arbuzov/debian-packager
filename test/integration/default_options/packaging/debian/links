@@ -1,0 +1,2 @@
+/var/log/tomcat7       /var/log/my-project
+/etc/init.d/tomcat7       /etc/init.d/my-project

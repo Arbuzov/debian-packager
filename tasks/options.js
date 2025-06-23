@@ -33,7 +33,8 @@ function _merge (config) {
         packaging_directory_name: 'packaging',
         target_architecture: "all",
         category: "misc",
-        disable_debuild_deps_check: false
+        disable_debuild_deps_check: false,
+        source_format: '3.0 (native)'
     };
 
     // Override defaultOptions with config.debianPackagerOptions properties

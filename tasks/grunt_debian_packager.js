@@ -8,13 +8,17 @@ module.exports = function(grunt) {
         var config = grunt.file.readJSON('package.json');
         var files = this.files.map(function (f) {
             var obj = { dest: f.dest };
-            if (f.cwd) {
-                obj.cwd = f.cwd;
-            }
-            if (f.orig && f.orig.src) {
-                obj.src = Array.isArray(f.orig.src) ? f.orig.src.slice() : [f.orig.src];
-            } else if (Array.isArray(f.src)) {
+            if (Array.isArray(f.src) && f.src.length) {
                 obj.src = f.src.slice();
+            } else if (f.orig && f.orig.src) {
+                obj.src = Array.isArray(f.orig.src) ? f.orig.src.slice() : [f.orig.src];
+                if (f.cwd) {
+                    obj.cwd = f.cwd;
+                } else if (f.orig && f.orig.cwd) {
+                    obj.cwd = f.orig.cwd;
+                }
+            } else if (f.cwd) {
+                obj.cwd = f.cwd;
             }
             return obj;
         });

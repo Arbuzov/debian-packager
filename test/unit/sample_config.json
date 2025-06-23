@@ -21,6 +21,7 @@
         "packaging_directory_name": "my-package",
         "target_architecture": "amd64",
         "category": "nodejs",
+        "source_format": "3.0 (quilt)",
         "disable_debuild_deps_check": true,
         "files" : [
             {

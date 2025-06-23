@@ -58,6 +58,7 @@ function create (config) {
         control = controlDirectory + '/control',
         links = controlDirectory + '/links',
         dirs = controlDirectory + '/dirs',
+        formatFile = controlDirectory + '/source/format',
         makefile = temp_directory + '/Makefile',
         dependencies = '';
 
@@ -105,6 +106,7 @@ function create (config) {
     _findAndReplace([control], '\\$\\{dependencies\\}', dependencies);
     _findAndReplace([control], '\\$\\{target_architecture\\}', settings.target_architecture);
     _findAndReplace([control], '\\$\\{category\\}', settings.category);
+    _findAndReplace([formatFile], '\\$\\{source_format\\}', settings.source_format);
     preparePackageContents(makefile, settings.files, settings.follow_soft_links, settings.quiet);
 
     // copy package lifecycle scripts
@@ -146,7 +148,7 @@ function create (config) {
     });
     debuild.on('exit', function (code) {
         if (code !== 0) {
-            var logFile = fs.readFileSync(glob.sync(settings.package_location + '*.build')[0]);
+            var logFile = fs.readFileSync(glob.sync(settings.package_location + '*.build')[0], 'utf8');
             console.error(messages.debuildError);
             if (logFile.search("Unmet\\sbuild\\sdependencies\\:\\sdebhelper") !== -1) {
                 console.warn(messages.debhelperNotFound);

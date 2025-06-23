@@ -103,6 +103,8 @@ exports.options_test = {
 
             test.equal(results.category, overrides.category);
 
+            test.equal(results.source_format, overrides.source_format);
+
             test.equal(results.disable_debuild_deps_check, overrides.disable_debuild_deps_check);
 
             test.deepEqual(results.files, overrides.files);

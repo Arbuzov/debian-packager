@@ -25,7 +25,7 @@ var _validateOptions = options._validate,
 
 function preparePackageContents (makefile, files, follow_soft_links, quiet) {
     _transformAndReplace([makefile], '\\$\\{file_list\\}', files, function (file) {
-        return [].concat.apply([], 
+        return [].concat.apply([],
             file.src.map(function (src) {
                 return glob.sync(path.join(file.cwd || '', src));
             })
@@ -41,7 +41,16 @@ function preparePackageContents (makefile, files, follow_soft_links, quiet) {
             if (!quiet) {
                 console.log('Adding \'' + filepath + '\' to \'' + file.dest + '\'');
             }
-            return '\tmkdir -p "$(DESTDIR)' + file.dest.substr(0, file.dest.lastIndexOf('/')) + '" && cp -a ' + (follow_soft_links ? "" : "-P ") + '"' + process.cwd() + '/' + filepath + '" "$(DESTDIR)' + file.dest + '"\n';
+            var destination = file.dest;
+            if (file.dest.endsWith('/')) {
+                if (file.cwd) {
+                    destination = path.join(file.dest, path.relative(file.cwd, filepath));
+                } else {
+                    destination = file.dest;
+                }
+            }
+            var mkdirPath = destination.endsWith('/') ? destination.replace(/\/+$/, '') : path.dirname(destination);
+            return '\tmkdir -p "$(DESTDIR)' + mkdirPath + '" && cp -a ' + (follow_soft_links ? '' : '-P ') + '"' + process.cwd() + '/' + filepath + '" "$(DESTDIR)' + destination + '"\n';
         }).join('');
     });
 }

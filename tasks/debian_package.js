@@ -49,7 +49,7 @@ function preparePackageContents (makefile, files, follow_soft_links, quiet) {
                     destination = file.dest;
                 }
             }
-            var mkdirPath = destination.endsWith('/') ? destination.replace(/\/$/, '') : path.dirname(destination);
+            var mkdirPath = destination.endsWith('/') ? destination.replace(/\/+$/, '') : path.dirname(destination);
             return '\tmkdir -p "$(DESTDIR)' + mkdirPath + '" && cp -a ' + (follow_soft_links ? '' : '-P ') + '"' + process.cwd() + '/' + filepath + '" "$(DESTDIR)' + destination + '"\n';
         }).join('');
     });
